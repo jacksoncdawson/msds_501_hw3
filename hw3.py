@@ -7,7 +7,26 @@ def create_image_array(file_name):
     file_name as an input variable and returns a list
     with the given width and height.
     """
-
+    
+    with open(file_name, 'r') as fd:
+        
+        try:
+            width = int(fd.readline())
+            length = int(fd.readline())
+        except TypeError:
+            return
+        
+        matrix = []
+        for i in range(length):
+            row = []
+            for _ in range(width):
+                r, g, b = fd.readline().strip().split(",")
+                pixels = [int(x) for x in [r,g,b]]
+                row.append(pixels)
+            matrix.append(row)
+        
+        print(matrix)
+        
 
 def xray_filter(numbers):
     """
@@ -58,3 +77,4 @@ def create_border(**kargs):
     with the given red, green, blue at the beginning and end of "numbers".
     """
 
+create_image_array("./test_input.txt")
